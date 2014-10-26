@@ -14,7 +14,8 @@ def test_init():
     assert isinstance(local_dependencybuilder, DependencyBuilder)
 
 def test_add_dependency():
-    assert test_dependencey_builder.add_dependency({'name':'argumentsprocessor', 'local':False}) is True
+    test_dependencey_builder.add_dependency({'name':'argumentsprocessor', 'local':False})
+    assert test_dependencey_builder.dependency_list['argumentsprocessor'] == {'name':'argumentsprocessor', 'local':False}
 
 def test_add_dependency_error():
     assert_raises(DependencyisNullorNoneException, test_dependencey_builder.add_dependency, '')
@@ -22,4 +23,18 @@ def test_add_dependency_error():
 
 def test_dependency_is_not_dictionary():
     assert_raises(DependencyisNotDictionary, test_dependencey_builder.add_dependency, 'Hello')
+
+def test_add_dependencies():
+    tlist = {
+        'argumentsprocessor': {
+        'name': 'argumentsprocessor',
+        'local': False,
+        },
+        'nose': {
+            'name': 'nose',
+            'local': False,
+        },
+    }
+    test_dependencey_builder.add_dependencies(tlist)
+    assert tlist == test_dependencey_builder.dependency_list
 
