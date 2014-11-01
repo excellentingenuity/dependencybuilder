@@ -37,7 +37,11 @@ class DependencyBuilder(object):
         # TODO: implement this function
 
     def check_init_arguments(self, required_dependencies=None, required_dependencies_file_path=None):
-        pass
+        if required_dependencies != None and required_dependencies != '':
+            self.add_dependencies(required_dependencies)
+        if required_dependencies_file_path != None and required_dependencies_file_path != '':
+            self.check_dependency_list_file_path(required_dependencies_file_path)
+        return True
 
     def add_dependency(self, dependency):
         if self.validate_dependency_parameter(dependency) is True:
@@ -75,3 +79,8 @@ class DependencyBuilder(object):
             return False
         else:
             return True
+
+    def check_dependency_list_file_path(self, dependency_list_file_path):
+        cwd = os.chdir
+
+        pass

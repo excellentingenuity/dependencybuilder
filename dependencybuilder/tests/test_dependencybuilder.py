@@ -38,3 +38,6 @@ def test_add_dependencies():
     test_dependencey_builder.add_dependencies(tlist)
     assert tlist == test_dependencey_builder.dependency_list
 
+def test_check_init_arguments():
+    assert test_dependencey_builder.check_init_arguments(), True
+
