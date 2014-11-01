@@ -33,7 +33,11 @@ class DependencyBuilder(object):
 
     def __init__(self, required_dependencies=None, required_dependencies_file_path=None):
         self.check_init_arguments(required_dependencies, required_dependencies_file_path)
+
         # TODO: implement this function
+
+    def check_init_arguments(self, required_dependencies=None, required_dependencies_file_path=None):
+        pass
 
     def add_dependency(self, dependency):
         if self.validate_dependency_parameter(dependency) is True:
