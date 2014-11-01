@@ -40,8 +40,11 @@ class DependencyBuilder(object):
         if required_dependencies != None and required_dependencies != '':
             self.add_dependencies(required_dependencies)
         if required_dependencies_file_path != None and required_dependencies_file_path != '':
-            self.check_dependency_list_file_path(required_dependencies_file_path)
+            self.add_dependencies_from_file(required_dependencies_file_path)
         return True
+
+    def add_dependencies_from_file(self, dependencies_file):
+        self.check_dependency_list_file_path(dependencies_file)
 
     def add_dependency(self, dependency):
         if self.validate_dependency_parameter(dependency) is True:
@@ -82,5 +85,9 @@ class DependencyBuilder(object):
 
     def check_dependency_list_file_path(self, dependency_list_file_path):
         cwd = os.chdir
-
-        pass
+        if os.path.isfile(cwd + dependency_list_file_path):
+            try:
+                file_of_dependencies = open(cwd + dependency_list_file_path, 'wb')
+            except:
+                raise 
+            self.add_dependencies(pickle.load(file_of_dependencies))
